@@ -1,27 +1,17 @@
 import { useState, useEffect } from "react";
 
 import Square from "../square/square.component";
+import { calculateWinner } from "../../utils/calculateWinner";
 
 import "./board.style.scss";
 
-function Board() {
-	const [squares, setSquare] = useState(Array(9).fill(null));
-
-	const handleClick = (i) => {
-		const newSquares = squares.slice();
-		newSquares[i] = "X";
-		setSquare(newSquares);
-	};
-
+function Board({ squares, onClick }) {
 	const renderSquare = (i) => {
-		return <Square value={squares[i]} onClick={() => handleClick(i)} />;
+		return <Square value={squares[i]} onClick={() => onClick(i)} />;
 	};
-
-	const status = "Next player: X";
 
 	return (
 		<div>
-			<div className='status'>{status}</div>
 			<div className='board-row'>
 				{renderSquare(0)}
 				{renderSquare(1)}
